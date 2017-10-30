@@ -134,7 +134,9 @@ function sendFileStream(req, res, path, opts) {
     stream.pipe(res)
 }
 //sendFile Kernel method
-
+var open = process.binding('fs').open;
+var sendfile = process.binding('fs').sendfile;
+var bufSz = 1 << 10;
 function sendfileKernel(req, path) {
   open(path, process.O_RDONLY, 0, function(err, fd) {
         // Track our offset in the file outside of sendData() so that its value

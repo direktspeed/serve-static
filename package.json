@@ -1,10 +1,10 @@
 {
   "name": "serve-static",
   "description": "Serve static files",
-  "version": "1.13.1",
+  "version": "1.13.3",
   "author": "Douglas Christopher Wilson <doug@somethingdoug.com>",
-  "license": "MIT",
-  "repository": "expressjs/serve-static",
+  "license": "Apache-2.0",
+  "repository": "direktspeed/serve-static-production",
   "dependencies": {
     "encodeurl": "~1.0.1",
     "escape-html": "~1.0.3",

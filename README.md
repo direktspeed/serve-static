@@ -35,6 +35,8 @@ to the next middleware, allowing for stacking and fall-backs.
 
 #### Options
 
+#####  
+
 ##### acceptRanges
 
 Enable or disable accepting ranged requests, defaults to true.
@@ -131,6 +133,15 @@ the arguments are:
   - `res` the response object
   - `path` the file path that is being sent
   - `stat` the stat object of the file that is being sent
+
+##### sendfile
+This is doing a couple of intesting things
+defaults to ```false```
+We use the synchronous version of the sendfile API. We do this because we don’t want to round-trip through the libeio thread pool.
+We need to handle the EAGAIN error status from the sendfile(2) system call. NodeJS exposes this via a thrown exception. Rather than issuing another sendfile call right away, we wait until the socket is drained to try again (otherwise we’re just busy-waiting). It’s possible that the performance cost of generating and handling this exception is high enough that we’d be better off using the asynchronous version of the sendfile API.
+We have to kick the write IOWatcher on the net.Stream instance ourselves to get the drain event to fire. This class only knows how to start the watcher itself when it notices a write(2) system call fail. Since we’re using sendfile(2) behind its back, we have to tell it to do this explicitly.
+We notice that we’ve hit the end of our source file when sendfile(2) returns 0 bytes written.
+
 
 ## Examples
 

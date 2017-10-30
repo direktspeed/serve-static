@@ -1,5 +1,7 @@
 # serve-static
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/direktspeed/serve-static-production.svg)](https://greenkeeper.io/)
+
 [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Linux Build][travis-image]][travis-url]
